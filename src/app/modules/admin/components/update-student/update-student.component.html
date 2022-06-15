@@ -1,0 +1,172 @@
+<!-- <p>update-student works!</p> -->
+<app-nbar></app-nbar>
+<div class="container">
+    <div class="row mt-5" style="border: 1px solid lightgray">
+        <div class="offset-2 col-8 mt-5 mb-5">
+            <form [formGroup]="StudentUpdationForm" (ngSubmit)= "UpdateStudent()">
+            <div class="offset-2">
+            <div class="col-10">
+                <div class="input-group">
+                    <div class="input-group-prepend col-4">
+                        <div class="input-group-text">Name</div>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Enter Name" formControlName="Name" >
+                </div>
+                    <div class="mt-2">
+                        <span style="color:red" *ngIf="Name && Name.invalid && Name.touched">Name input field is not valid</span>
+                    </div>
+            </div>
+
+            <div class="col-10 mt-4">
+                <div class="input-group">
+                    <div class="input-group-prepend col-4">
+                        <div class="input-group-text">Father Name</div>
+                    </div>
+                <input type="text" class="form-control" placeholder="Enter FatherName" formControlName="FatherName">
+                </div>
+                    <div class="mt-2">
+                        <span style="color:red" *ngIf="FatherName && FatherName.invalid && FatherName.touched">FatherName input field is not valid</span>
+                    </div>
+            </div>
+
+
+            <div class="col-10 mt-4">
+                <div class="input-group">
+                    <div class="input-group-prepend col-4">
+                        <div class="input-group-text">Address</div>
+                    </div>
+                <input type="text" class="form-control" placeholder="Enter Address" formControlName="Address">
+                </div>
+                    <div class="mt-2">
+                        <span style="color:red" *ngIf="Address && Address.invalid && Address.touched">Address input field is not valid</span>
+                    </div>
+            </div>
+
+
+            <div class="col-10 mt-4">
+                <div class="input-group">
+                    <div class="input-group-prepend col-4">
+                        <div class="input-group-text">Previous Program</div>
+                    </div>
+                <select class="d-inline-block"  class="form-select" formControlName="LastProgram">                               
+                    <option *ngFor="let program of programs" value="{{program.name}}">{{program.name}}<hr></option>
+                </select>  
+                </div> 
+                <div class="mt-2">
+                    <span style="color:red" *ngIf="LastProgram && LastProgram.invalid && LastProgram.touched">LastProgram input field is not valid</span>
+                </div>
+            </div>
+
+
+            <div class="col-10 mt-4">
+                <div class="input-group">
+                    <div class="input-group-prepend col-4">
+                        <div class="input-group-text">Current Program</div>
+                    </div>
+                    <select class="d-inline-block" class="form-select" formControlName="CurrentProgram">                           
+                        
+                        <option *ngFor="let program of programs" value="{{program.name}}">{{program.name}}<hr></option>
+                    </select> 
+                </div>
+                <div class="mt-2">
+                    <span style="color:red" *ngIf="CurrentProgram && CurrentProgram.invalid && CurrentProgram.touched">CurrentProgram input field is not valid</span>
+                </div>
+            </div>
+
+
+            <div class="col-10 mt-4">
+                <div class="input-group">
+                    <div class="input-group-prepend col-4">
+                        <div class="input-group-text lead">Status</div>
+                    </div>
+                <select class="d-inline-block" class="form-select" formControlName="Status">                           
+    
+                    <option value="Online">Online<hr></option>
+                    <option value="Offline">Offline<hr></option>
+                    <option value="Left">Left<hr></option>
+                </select> 
+                </div>
+                <div class="mt-2">
+                    <span style="color:red" *ngIf="Status && Status.invalid && Status.touched">Status input field is not valid</span>
+                </div>
+            </div>
+
+
+            <div class="col-10 mt-4" >
+                <div class="input-group">
+                    <div class="input-group-prepend col-4">
+                        <div class="input-group-text">Current GPA</div>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Enter Current GPA" formControlName="CurrentGPA">
+                </div>
+                    <div class="mt-2">
+                        <span style="color:red" *ngIf="CurrentGPA && CurrentGPA.invalid && CurrentGPA.touched">CurrentGPA input field is not valid</span>
+                </div>
+            </div>
+
+
+            <div class="col-10 mt-5">            
+                <button [disabled]="StudentUpdationForm.invalid"  class="btn btn-outline-success w-100">Update</button> 
+            </div>
+            
+        </div>
+            
+        </form>
+        
+        </div>
+    
+    </div>
+
+</div>
+<!-- 
+<form [formGroup]="StudentUpdationForm" (ngSubmit)= "UpdateStudent()">
+
+    <input type="text" placeholder="Enter Name" formControlName="Name" >
+    <span style="color:red" *ngIf="Name && Name.invalid && Name.touched">Name input field is not valid</span>
+    <br>
+    
+    <input type="text" placeholder="Enter FatherName" formControlName="FatherName">
+    <span style="color:red" *ngIf="FatherName && FatherName.invalid && FatherName.touched">FatherName input field is not valid</span>
+    <br>
+    
+    <input type="text" placeholder="Enter Address" formControlName="Address">
+    <span style="color:red" *ngIf="Address && Address.invalid && Address.touched">Address input field is not valid</span>
+    <br>
+    
+    <select class="d-inline-block " formControlName="LastProgram">                           
+       
+        <option *ngFor="let program of programs" value="{{program.name}}">{{program.name}}<hr></option>
+    </select>   
+    
+    <span style="color:red" *ngIf="LastProgram && LastProgram.invalid && LastProgram.touched">LastProgram input field is not valid</span>
+    <br>
+    
+    <select class="d-inline-block" formControlName="CurrentProgram">                           
+   
+        <option *ngFor="let program of programs" value="{{program.name}}">{{program.name}}<hr></option>
+    </select> 
+    
+    <span style="color:red" *ngIf="CurrentProgram && CurrentProgram.invalid && CurrentProgram.touched">CurrentProgram input field is not valid</span>
+    <br>
+    
+    <select class="d-inline-block" formControlName="Status">                           
+       
+        <option value="Online">Online<hr></option>
+        <option value="Offline">Offline<hr></option>
+        <option value="Left">Left<hr></option>
+    </select> 
+    
+    <span style="color:red" *ngIf="Status && Status.invalid && Status.touched">Status input field is not valid</span>
+    <br>
+
+    <input type="text" placeholder="Enter Current GPA" formControlName="CurrentGPA">
+    <span style="color:red" *ngIf="CurrentGPA && CurrentGPA.invalid && CurrentGPA.touched">CurrentGPA input field is not valid</span>
+    <br>
+    
+    <br>
+    <br>
+    <button [disabled]="StudentUpdationForm.invalid"  class="btn btn-outline-dark">Update</button>    
+</form> -->
+
+
+

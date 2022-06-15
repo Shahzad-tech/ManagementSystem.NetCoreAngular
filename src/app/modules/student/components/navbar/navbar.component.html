@@ -1,0 +1,26 @@
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand lead">MS: Logged in as {{UserRole}}</a>
+      <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button> -->
+      <div class="collapse navbar-collapse" id="navbarNavDropdown" *ngIf="UserRole.includes('Admin')">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-auto">
+        </ul>
+        <div ngbDropdown class="d-inline-block">
+          <button type="button" class="btn btn-outline-success me-2" id="dropdownManual" ngbDropdownToggle>Modules</button>
+          <div ngbDropdownMenu aria-labelledby="dropdownManual">                
+            <h4 routerLink="/admin/adminDashboard" ngbDropdownItem class="lead text-secondary cursortoMouse">Admin</h4>
+            <hr>
+            <h4 routerLink="/teacher/teacherDashboard" ngbDropdownItem class="lead text-secondary cursortoMouse">Teacher</h4>
+            <hr>
+            <h4 routerLink="/student/studentDashboard" ngbDropdownItem class="lead text-secondary cursortoMouse">Student</h4>        
+          </div>
+        </div>
+      </div> 
+      <button class="btn btn-outline-success" (click) = "Logout()" >{{userEmail}}
+      </button>
+    
+    </div>
+  </nav>

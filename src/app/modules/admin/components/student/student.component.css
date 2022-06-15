@@ -1,0 +1,10 @@
+.modal-body input, select{
+    border: 1px solid goldenrod;
+}
+table th{
+color: whitesmoke;
+font-size: medium;
+font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+padding-bottom: 20px;
+padding-top: 20px;
+}

@@ -1,0 +1,38 @@
+<div class="container">
+    <div class="row justify-content-center align-items-center" *ngIf = "isLoading==true; else isnotloading">
+        <mat-spinner></mat-spinner>
+    </div> 
+</div>
+<ng-template #isnotloading>
+    <div class="container mt-5">
+        <div class="row justify-content-center mb-5">Student Management System</div>
+    <form [formGroup]="LoginForm" (ngSubmit)= "LoginUsers()" style="border: 1px solid grey">
+        <div class="offset-1 mt-5 mb-5"> 
+                <div class="row">
+                    <div  class="col-10" >
+                        <input type="email" class="form-control" placeholder="Enter Email" formControlName="Email"> 
+                        <small style="color:red" *ngIf="Email && Email.invalid && Email.touched">Email field is not valid</small>
+                        <br>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="mb-4 col-10">
+                        <input type="password" class="form-control" placeholder="Enter Password" formControlName="Password" >      
+                        <small style="color:red" *ngIf="Password && Password.invalid && Password.touched">Password field is not valid</small>
+                        <br>
+                    </div> 
+                </div>
+
+                <div class="row mb-4 ">
+                    <div class="col-10">
+                        <button [disabled]="LoginForm.invalid"  class="btn w-100 btn-outline-success">Login</button>    
+                </div>
+                
+            </div>
+        </div>
+    </form>
+
+    </div>
+</ng-template>
+

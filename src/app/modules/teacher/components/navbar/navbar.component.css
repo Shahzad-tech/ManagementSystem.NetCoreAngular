@@ -1,0 +1,10 @@
+.list{
+    margin-top: 2%;
+} 
+.cursortoMouse{
+    cursor: pointer;
+  }
+.navbar h4{
+    padding: 1;
+    font-size: medium;
+}

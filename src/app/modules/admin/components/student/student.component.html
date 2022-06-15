@@ -1,0 +1,151 @@
+<app-nbar></app-nbar>
+<div class="container">
+
+  
+        <div class="row mt-5 mb-5 justify-content-end">
+            <div class="col-2">
+              <button class="btn btn-outline-success" style="padding:8px" (click)="open(content)">
+                Add Students
+              </button>
+            </div>
+        </div>
+
+        <hr>
+        
+
+    <div class="row mt-5">
+        <table class="table table-striped tableCustom" matSort (matSortChange)="sortData($event)" >
+            <thead style="background-color:rgb(248, 165, 55)">
+            <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Father Name</th>
+            <th scope="col">Program</th>
+            <th scope="col">Current GPA</th>
+            <th scope="col">Status</th>
+            <th scope="col" mat-sort-header="CreatedDate">Registration Date</th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of studentData">
+                  <td>{{data.name}}</td>
+                  <td>{{data.fatherName}}</td>
+                  <td>{{data.currentProgram}}</td>
+                  <td>{{data.currentGPA}}</td>
+                  <td><span class="material-icons" 
+                    [ngStyle]="{'color':data.status=='Online' ? 'green' : data.status=='Offline' ? 'yellow' : 'red'}">fiber_manual_record</span>
+                  </td>
+                  <td>{{data.createdDate | date: 'dd/MM/yyyy'}}</td>
+                  <td><button type="button" class="btn btn-success" (click)="ToEditComponent(data)">Edit</button></td>
+                </tr>
+            </tbody>
+
+        </table>
+      
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+
+    <ng-template #content let-modal>
+        <div class="modal-header">
+          <!-- <h2 class="lead" id="modal-basic-title">Register Student</h2> -->
+          <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+        </div>
+        <div class="modal-body">
+       
+          <form [formGroup]="StudentRegistrationForm" (ngSubmit)= "RegisterStudent()">
+                
+           
+                <div class="row col-12 mt-3">
+                  <div class="col-7"><h2 class="lead" style="color: goldenrod">Registration Information</h2></div>
+                  <div class="col-5" style="color: rgb(136, 122, 40)"><hr></div>
+                </div>
+                
+                <div class="mt-3">
+                  <input type="email" class="form-control" placeholder="Enter Email" formControlName="Email">
+                  <span style="color:red" *ngIf="StudentEmail && StudentEmail.invalid && StudentEmail.touched">Email is not valid</span>
+                </div>
+                
+                <div class="mt-3">
+                  <input type="password" placeholder="Enter Password" formControlName="Password" class="form-control">
+                  <span style="color:red" *ngIf="StudentPassword && StudentPassword.invalid && StudentPassword.touched">Password input field is not valid</span>
+                </div>
+                
+                <div class="mt-3">
+                  <input type="text" placeholder="Enter UserName" formControlName="UserName" class="form-control">
+                  <span style="color:red" *ngIf="UserName && UserName.invalid && UserName.touched">User Name input field is not valid</span>
+                </div>
+
+                <div class="mt-3">
+                  <input type="text" placeholder="Enter UniRollNo" formControlName="UniRollNo" class="form-control">
+                  <span style="color:red" *ngIf="UniRollNo && UniRollNo.invalid && UniRollNo.touched">UniRollNo input field is not valid</span>
+                </div>
+
+                <div class="row col-12 mt-4">
+                  <div class="col-6"><h2 class="lead" style="color: goldenrod">Personal Information</h2></div>
+                  <div class="col-6" style="color: rgb(136, 122, 40)"><hr></div>
+                </div>
+                <!-- -------------------------------------------------------------------------------------- -->
+                
+                <div class="mt-4">
+                  <input type="text" placeholder="Enter Name" formControlName="Name" class="form-control">
+                  <span style="color:red" *ngIf="Name && Name.invalid && Name.touched">Name input field is not valid</span>
+                </div>
+                
+                <div class="mt-3">
+                  <input type="text" placeholder="Enter FatherName" formControlName="FatherName" class="form-control">
+                  <span style="color:red" *ngIf="FatherName && FatherName.invalid && FatherName.touched">FatherName input field is not valid</span>
+                </div>
+                
+                <div class="mt-3">
+                  <input type="text" placeholder="Enter Address" formControlName="Address" class="form-control">
+                  <span style="color:red" *ngIf="Address && Address.invalid && Address.touched">Address input field is not valid</span>
+                </div>
+               
+              <div class="mt-3">
+                <select class="d-inline-block col-10" formControlName="LastProgram" class="form-select">                           
+                  <option value="">Select Last Program</option>                       
+                  <option *ngFor="let program of programs" value="{{program.name}}">{{program.name}}<hr></option>
+                </select>     
+                <span style="color:red" *ngIf="LastProgram && LastProgram.invalid && LastProgram.touched">LastProgram input field is not valid</span>
+              </div>
+
+                
+              <div class="mt-3">
+                <select class="d-inline-block col-10" formControlName="CurrentProgram" class="form-select">                           
+                  <option value="">Select Current Program</option>                       
+                  <option *ngFor="let program of programs" value="{{program.name}}">{{program.name}}<hr></option>
+                </select>     
+                <span style="color:red" *ngIf="CurrentProgram && CurrentProgram.invalid && CurrentProgram.touched">CurrentProgram input field is not valid</span>
+              </div>
+
+               <div class="row mt-3">
+                <div class="col-6">
+                    <select class="d-inline-block col-10" formControlName="Status" class="form-select">                           
+                      <option value="">Select Status</option>                       
+                      <option value="Online">Online<hr></option>
+                      <option value="Offline">Offline<hr></option>
+                      <option value="Left">Left<hr></option>
+                    </select> 
+                  <span style="color:red" *ngIf="Status && Status.invalid && Status.touched">Status input field is not valid</span>
+                </div>
+                <div class="col-6">
+                  <input type="text" placeholder="Enter Current GPA" formControlName="CurrentGPA" class="form-control">
+                  <span style="color:red" *ngIf="CurrentGPA && CurrentGPA.invalid && CurrentGPA.touched">CurrentGPA input field is not valid</span>
+               </div> 
+               </div>
+
+               <div class="mt-5"> 
+                <button [disabled]="StudentRegistrationForm.invalid"  class="btn btn-outline-success w-100" (click)="modal.close('Save click')">Register</button>
+               </div>    
+          </form>
+        </div>
+
+      
+      </ng-template>
+
+    </div>
+  </div>
+
+</div>
